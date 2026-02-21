@@ -21,8 +21,8 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0">
             <Link to="/" className="text-2xl font-display font-bold">
-              <span className="text-tattoo-gold">INK</span>
-              <span className="text-white">MASTERS</span>
+              <span className="text-tattoo-gold">Inian</span>
+              <span className="text-white">Tattoo</span>
             </Link>
           </div>
           

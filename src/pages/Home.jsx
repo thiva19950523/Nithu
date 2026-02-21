@@ -33,8 +33,8 @@ const Home = () => {
         <div className="relative h-full flex items-center justify-center text-center">
           <div className="max-w-4xl px-4">
             <h1 className="text-5xl md:text-7xl font-display font-bold mb-6">
-              <span className="text-tattoo-gold">EXPRESS</span>
-              <span className="text-white"> YOURSELF</span>
+              <span className="text-tattoo-gold">INIYAN</span>
+              <span className="text-white"> TATTOO</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8">
               Professional tattoo artists creating unique masterpieces since 2010
