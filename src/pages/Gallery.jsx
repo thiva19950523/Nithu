@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import img1 from '../assets/images/t1.jpeg';
-import img2 from '../assets/images/t2.jpeg';
-import img3 from '../assets/images/t3.jpeg';
+import img1 from '../assets/images/i1.jpeg';
+import img2 from '../assets/images/i2.jpeg';
+import img3 from '../assets/images/i3.jpeg';
+import img4 from '../assets/images/i4.jpeg';
+
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -10,6 +12,8 @@ const Gallery = () => {
     { id: 1, src: img1, category: 'Realism', artist: 'Mike' },
     { id: 2, src: img2, category: 'Traditional', artist: 'Sarah' },
     { id: 3, src: img3, category: 'Geometric', artist: 'Alex' },
+    { id: 4 , src: img4, category: 'Realism', artist: 'Mike' },
+
     // Add more images as needed with their imports
   ];
 
