@@ -7,99 +7,97 @@ const Contact = () => {
     name: '',
     email: '',
     phone: '',
-    message: ''
+    message: '',
   });
+
   const [status, setStatus] = useState({ type: '', message: '' });
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return;
+
     setLoading(true);
     setStatus({ type: '', message: '' });
 
     try {
-      const response = await axios.post('http://localhost:5000/send-email', formData);
-      setStatus({ type: 'success', message: 'Message sent successfully! We\'ll get back to you soon.' });
+      await axios.post('http://localhost:5000/send-email', formData);
+      setStatus({
+        type: 'success',
+        message: "Message sent successfully! We'll contact you soon.",
+      });
       setFormData({ name: '', email: '', phone: '', message: '' });
-    } catch (error) {
-      setStatus({ type: 'error', message: 'Failed to send message. Please try again.' });
+    } catch {
+      setStatus({
+        type: 'error',
+        message: 'Something went wrong. Please try again.',
+      });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="pt-20 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <h1 className="text-5xl font-display text-center mb-4">
-          <span className="text-tattoo-gold">CONTACT</span> US
-        </h1>
-        <p className="text-center text-gray-400 mb-12">
-          Get in touch for consultations or questions
-        </p>
+    <div className="pt-20 min-h-screen bg-black">
+      <div className="max-w-7xl mx-auto px-4 py-14">
+        {/* Header */}
+        <div className="text-center mb-14">
+          <h1 className="text-5xl font-display mb-4">
+            <span className="text-tattoo-gold">CONTACT</span> US
+          </h1>
+          <p className="text-gray-400 max-w-xl mx-auto">
+            Book consultations, ask questions, or just say hello.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
           {/* Contact Form */}
-          <div className="bg-gray-900/50 p-8 rounded-lg border border-tattoo-gold/30">
+          <div className="relative bg-gradient-to-br from-gray-900/70 to-black p-8 rounded-2xl border border-tattoo-gold/30 shadow-xl">
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg focus:border-tattoo-gold focus:outline-none text-white"
-                />
-              </div>
+              {['name', 'email', 'phone'].map((field, i) => (
+                <div key={i}>
+                  <label className="block text-sm mb-2 capitalize text-gray-300">
+                    {field}
+                  </label>
+                  <input
+                    type={field === 'email' ? 'email' : field === 'phone' ? 'tel' : 'text'}
+                    name={field}
+                    value={formData[field]}
+                    onChange={handleChange}
+                    required={field !== 'phone'}
+                    className="w-full px-4 py-3 bg-black/80 border border-gray-700 rounded-xl text-white
+                      focus:border-tattoo-gold focus:ring-1 focus:ring-tattoo-gold outline-none transition"
+                  />
+                </div>
+              ))}
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg focus:border-tattoo-gold focus:outline-none text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Phone</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg focus:border-tattoo-gold focus:outline-none text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                <label className="block text-sm mb-2 text-gray-300">
+                  Message
+                </label>
                 <textarea
                   name="message"
+                  rows="5"
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  rows="5"
-                  className="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg focus:border-tattoo-gold focus:outline-none text-white"
+                  className="w-full px-4 py-3 bg-black/80 border border-gray-700 rounded-xl text-white
+                    focus:border-tattoo-gold focus:ring-1 focus:ring-tattoo-gold outline-none transition resize-none"
                 />
               </div>
 
               {status.message && (
-                <div className={`p-4 rounded-lg ${
-                  status.type === 'success' ? 'bg-green-900/50 text-green-300' : 'bg-red-900/50 text-red-300'
-                }`}>
+                <div
+                  className={`text-sm px-4 py-3 rounded-xl border ${
+                    status.type === 'success'
+                      ? 'bg-green-900/40 text-green-300 border-green-500/30'
+                      : 'bg-red-900/40 text-red-300 border-red-500/30'
+                  }`}
+                >
                   {status.message}
                 </div>
               )}
@@ -107,47 +105,48 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-tattoo-gold text-black py-3 rounded-lg font-semibold hover:bg-tattoo-red transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-3 rounded-xl font-semibold text-white
+                  bg-tattoo-gold hover:bg-tattoo-red transition-all
+                  disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {loading ? 'Sending...' : 'Send Message'}
+                {loading ? 'Sending…' : 'Send Message'}
               </button>
             </form>
           </div>
 
           {/* Contact Info */}
           <div className="space-y-8">
-            <div className="bg-gray-900/50 p-8 rounded-lg border border-tattoo-gold/30">
-              <h3 className="text-2xl font-display text-tattoo-gold mb-6">Visit Us</h3>
-              <div className="space-y-4">
-                <div className="flex items-start space-x-4">
-                  <MapPinIcon className="h-6 w-6 text-tattoo-gold flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold">Studio Address</p>
-                    <p className="text-gray-400">123 Thirunelveli Road,<br />Kalviyankaadu.</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <PhoneIcon className="h-6 w-6 text-tattoo-gold flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold">Phone</p>
-                    <p className="text-gray-400">(555) 123-4567</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <EnvelopeIcon className="h-6 w-6 text-tattoo-gold flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold">Email</p>
-                    <p className="text-gray-400">info@inkmasters.com</p>
-                  </div>
-                </div>
+            <div className="bg-gradient-to-br from-gray-900/70 to-black p-8 rounded-2xl border border-tattoo-gold/30 shadow-xl">
+              <h3 className="text-2xl font-display text-tattoo-gold mb-6">
+                Visit Us
+              </h3>
+
+              <div className="space-y-6">
+                <InfoRow
+                  icon={<MapPinIcon className="h-6 w-6" />}
+                  title="Studio Address"
+                  text="123 Thirunelveli Road, Kalviyankaadu"
+                />
+                <InfoRow
+                  icon={<PhoneIcon className="h-6 w-6" />}
+                  title="Phone"
+                  text="+94 77 922 8340"
+                />
+                <InfoRow
+                  icon={<EnvelopeIcon className="h-6 w-6" />}
+                  title="Email"
+                  text="nithu@gail.com"
+                />
               </div>
             </div>
 
-            <div className="bg-gray-900/50 p-8 rounded-lg border border-tattoo-gold/30">
-              <h3 className="text-2xl font-display text-tattoo-gold mb-4">Hours</h3>
-              <div className="space-y-2 text-gray-400">
-                <p>Monday - Friday: 11am - 8pm</p>
-                <p>Saturday: 12pm - 6pm</p>
+            <div className="bg-gradient-to-br from-gray-900/70 to-black p-8 rounded-2xl border border-tattoo-gold/30 shadow-xl">
+              <h3 className="text-2xl font-display text-tattoo-gold mb-4">
+                Opening Hours
+              </h3>
+              <div className="text-gray-400 space-y-2">
+                <p>Mon – Fri: 11:00 AM – 8:00 PM</p>
+                <p>Saturday: 12:00 PM – 6:00 PM</p>
                 <p>Sunday: Closed</p>
               </div>
             </div>
@@ -157,5 +156,15 @@ const Contact = () => {
     </div>
   );
 };
+
+const InfoRow = ({ icon, title, text }) => (
+  <div className="flex items-start gap-4">
+    <div className="text-tattoo-gold mt-1">{icon}</div>
+    <div>
+      <p className="font-semibold text-white">{title}</p>
+      <p className="text-gray-400 text-sm">{text}</p>
+    </div>
+  </div>
+);
 
 export default Contact;

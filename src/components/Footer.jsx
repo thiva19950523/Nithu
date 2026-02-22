@@ -30,7 +30,7 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4 text-tattoo-gold">Contact</h4>
             <ul className="space-y-2 text-gray-400">
-              <li>123 Kalviyankaadu Road,</li>
+              <li>123, Kalviyankaadu Road,</li>
               <li>Kalviyankaadu.</li>
               <li>nithu@gmail.com</li>
               <li>+94  922 8340</li>
