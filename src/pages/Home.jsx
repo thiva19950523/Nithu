@@ -37,13 +37,13 @@ const Home = () => {
               <span className="text-white"> TATTOO</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8">
-              Professional tattoo artists creating unique masterpieces since 2010
+              Professional tattoo artists creating unique masterpieces since 2022
             </p>
             <Link
               to="/contact"
-              className="inline-block bg-tattoo-gold text-black px-8 py-4 text-lg font-semibold rounded-full hover:bg-tattoo-red transition-all duration-300 transform hover:scale-105"
+              className="inline-block bg-tattoo-gold text-white px-8 py-4 text-lg font-semibold rounded-full hover:bg-tattoo-red transition-all duration-300 transform hover:scale-105"
             >
-              Book Consultation
+              Book Now
             </Link>
           </div>
         </div>

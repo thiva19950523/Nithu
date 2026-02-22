@@ -1,11 +1,25 @@
 import React, { useState } from 'react';
 
+// ✅ Import videos at the top
+import video1 from '../assets/videos/v1.mp4';
+import video2 from '../assets/videos/v2.mp4';
+
 const Videos = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
 
   const videos = [
-    { id: 1, src: '/assets/videos/v1.mp4', title: 'Tattoo Process - Dragon Design', duration: '3:45' },
-    { id: 2, src: '/assets/videos/v2.mp4', title: 'Time-lapse: Portrait Tattoo', duration: '2:30' },
+    {
+      id: 1,
+      src: video1,
+      title: 'Tattoo Process - Dragon Design',
+      duration: '3:45',
+    },
+    {
+      id: 2,
+      src: video2,
+      title: 'Time-lapse: Portrait Tattoo',
+      duration: '2:30',
+    },
   ];
 
   return (
@@ -14,6 +28,7 @@ const Videos = () => {
         <h1 className="text-5xl font-display text-center mb-4">
           <span className="text-tattoo-gold">VIDEO</span> GALLERY
         </h1>
+
         <p className="text-center text-gray-400 mb-12">
           Watch our artists at work
         </p>
@@ -25,9 +40,14 @@ const Videos = () => {
               className="group relative cursor-pointer"
               onClick={() => setSelectedVideo(video)}
             >
-              <video className="w-full h-64 object-cover rounded-lg">
+              <video
+                className="w-full h-64 object-cover rounded-lg"
+                muted
+                playsInline
+              >
                 <source src={video.src} type="video/mp4" />
               </video>
+
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-tattoo-gold rounded-full flex items-center justify-center mx-auto mb-3">
@@ -41,21 +61,25 @@ const Videos = () => {
           ))}
         </div>
 
-        {/* Video Modal */}
+        {/* 🎬 Video Modal */}
         {selectedVideo && (
           <div
             className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
             onClick={() => setSelectedVideo(null)}
           >
-            <div className="relative max-w-4xl w-full">
-              <video controls className="w-full rounded-lg">
+            <div
+              className="relative max-w-4xl w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <video controls autoPlay className="w-full rounded-lg">
                 <source src={selectedVideo.src} type="video/mp4" />
               </video>
+
               <button
                 onClick={() => setSelectedVideo(null)}
                 className="absolute -top-10 right-0 text-white hover:text-tattoo-gold text-2xl"
               >
-                Close ✕
+                ✕ Close
               </button>
             </div>
           </div>

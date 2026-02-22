@@ -123,7 +123,7 @@ const Contact = () => {
                   <MapPinIcon className="h-6 w-6 text-tattoo-gold flex-shrink-0" />
                   <div>
                     <p className="font-semibold">Studio Address</p>
-                    <p className="text-gray-400">123 Ink Street<br />New York, NY 10001</p>
+                    <p className="text-gray-400">123 Thirunelveli Road,<br />Kalviyankaadu.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
