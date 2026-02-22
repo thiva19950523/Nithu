@@ -14,7 +14,7 @@ const Gallery = () => {
   ];
 
   return (
-    <div className="pt-20 min-h-screen">
+    <div className="md:pt-20 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 py-12">
         <h1 className="text-5xl font-display text-center mb-4">
           <span className="text-tattoo-gold">OUR</span> GALLERY

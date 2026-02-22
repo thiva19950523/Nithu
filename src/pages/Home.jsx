@@ -60,7 +60,7 @@ const Home = () => {
       </section>
 
       {/* Featured Work Section - Card Design */}
-      <section className="py-20 px-4">
+      <section className="md:py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-display text-center mb-12">
             <span className="text-tattoo-gold">FEATURED</span> WORK
